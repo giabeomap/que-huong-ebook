@@ -1,0 +1,6 @@
+# Large archives & >100 MB raw source files are hosted in GitHub Releases (v1.0.0)
+downloads/
+file-nguon/
+node_modules/
+.DS_Store
+Thumbs.db

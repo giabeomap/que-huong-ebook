@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>Quê Hương – Những Vùng Trời Của Tổ Quốc | Sách Điện Tử</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-spread="0" data-orientation="landscape">
+  <!-- Dynamic multi-layer ambient gradient backdrop -->
+  <div class="ambient-backdrop" aria-hidden="true">
+    <div class="bg-layer bg-layer--0 is-active"></div>
+    <div class="bg-layer bg-layer--1"></div>
+    <div class="bg-layer bg-layer--2"></div>
+    <div class="bg-layer bg-layer--3"></div>
+    <div class="bg-layer bg-layer--4"></div>
+    <div class="bg-layer bg-layer--5"></div>
+    <div class="bg-layer bg-layer--6"></div>
+    <div class="bg-orb bg-orb--a"></div>
+    <div class="bg-orb bg-orb--b"></div>
+    <div class="bg-orb bg-orb--pulse"></div>
+    <div class="bg-vignette"></div>
+    <div class="bg-grain"></div>
+  </div>
+
+  <!-- Hidden HTML5 Audio Elements -->
+  <audio id="audio-bgm" src="assets/audio/nhac-nen-xuyen-suot.mp3" loop preload="metadata"></audio>
+  <audio id="audio-page" preload="auto"></audio>
+
+  <!-- Floating Minimal Top Bar -->
+  <header class="topbar">
+    <div class="topbar__brand">
+      <span class="brand-dot" aria-hidden="true"></span>
+      <span class="brand-title">Quê Hương · Miền Thương Nhớ</span>
+      <span class="brand-divider" aria-hidden="true"></span>
+      <span id="spread-label" class="spread-label">Trang bìa</span>
+    </div>
+
+    <div class="topbar__actions">
+      <!-- Auto-play page audio toggle -->
+      <button
+        id="btn-auto-audio"
+        class="pill-toggle"
+        type="button"
+        title="Tự động phát audio khi lật tới trang có audio"
+        aria-label="Tự động bật audio khi lật trang"
+        aria-pressed="false"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+          <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+          <line x1="12" y1="19" x2="12" y2="23" />
+        </svg>
+        <span class="pill-toggle__label">Tự động nghe</span>
+      </button>
+
+      <!-- Auto-flip book toggle -->
+      <button
+        id="btn-auto-flip"
+        class="pill-toggle"
+        type="button"
+        title="Tự động lật sách qua từng trang"
+        aria-label="Chế độ tự động lật sách"
+        aria-pressed="false"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polygon points="5 3 19 12 5 21 5 3" />
+          <line x1="19" y1="5" x2="19" y2="19" />
+        </svg>
+        <span class="pill-toggle__label">Tự động lật</span>
+      </button>
+
+      <span class="actions-divider" aria-hidden="true"></span>
+
+      <!-- Global ambient BGM toggle -->
+      <button
+        id="btn-bgm"
+        class="icon-btn is-active"
+        type="button"
+        title="Bật/tắt nhạc nền xuyên suốt (âm lượng nhỏ)"
+        aria-label="Bật hoặc tắt nhạc nền xuyên suốt"
+        aria-pressed="true"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M9 18V5l12-2v13" />
+          <circle cx="6" cy="18" r="3" />
+          <circle cx="18" cy="16" r="3" />
+        </svg>
+      </button>
+
+      <!-- Page-turn sound toggle -->
+      <button
+        id="btn-sound"
+        class="icon-btn is-active"
+        type="button"
+        title="Bật/tắt âm thanh lật trang"
+        aria-label="Bật hoặc tắt âm thanh lật trang"
+        aria-pressed="true"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M11 5L6 9H2v6h4l5 4V5z" />
+          <path class="sound-wave" d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+          <path class="sound-wave" d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+        </svg>
+      </button>
+
+      <!-- Zoom toggle -->
+      <button
+        id="btn-zoom"
+        class="icon-btn"
+        type="button"
+        title="Phóng to để đọc rõ chữ (Z)"
+        aria-label="Phóng to hoặc thu nhỏ trang sách"
+        aria-pressed="false"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7" />
+          <path d="M21 21l-4.35-4.35" />
+          <path class="zoom-plus" d="M11 8v6M8 11h6" />
+        </svg>
+      </button>
+
+      <!-- Fullscreen toggle -->
+      <button
+        id="btn-fullscreen"
+        class="icon-btn"
+        type="button"
+        title="Toàn màn hình (F)"
+        aria-label="Bật hoặc tắt chế độ toàn màn hình"
+        aria-pressed="false"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
+        </svg>
+      </button>
+
+      <span class="actions-divider" aria-hidden="true"></span>
+
+      <!-- Download entire source folder as ZIP -->
+      <a
+        id="btn-download-source"
+        class="pill-toggle pill-toggle--download"
+        href="downloads/file-nguon.zip"
+        download="file nguồn.zip"
+        title="Tải xuống toàn bộ thư mục nguồn (file nguồn.zip)"
+        aria-label="Tải xuống toàn bộ thư mục nguồn dưới dạng file zip"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+          <polyline points="7 10 12 15 17 10" />
+          <line x1="12" y1="15" x2="12" y2="3" />
+        </svg>
+        <span class="pill-toggle__label">Tải file nguồn</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Book Reading Stage -->
+  <main class="reader-stage" id="reader-stage">
+    <button
+      id="nav-prev-side"
+      class="side-nav side-nav--prev"
+      type="button"
+      title="Trang trước (Mũi tên trái)"
+      aria-label="Lật về trang trước"
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="15 18 9 12 15 6" />
+      </svg>
+    </button>
+
+    <div class="book-viewport" id="book-viewport">
+      <div class="book-pan-layer" id="book-pan-layer">
+        <div class="book-stage" id="book-stage">
+          <div class="book-wrapper" id="book-wrapper">
+            <!-- Realistic table shadow beneath book -->
+            <div class="book-table-shadow" id="book-table-shadow" aria-hidden="true"></div>
+
+            <!-- Book Root for StPageFlip (12 pages = Front Cover + 5 spreads + Back Cover) -->
+            <div id="flipbook" class="flipbook">
+              <!-- Page 0: Bìa trước -->
+              <div class="page page--cover page--front-cover" data-density="hard">
+                <div class="page-inner page-inner--image">
+                  <img
+                    src="assets/pages/8.webp"
+                    alt="Trang bìa - Quê Hương: Những vùng trời của tổ quốc"
+                    draggable="false"
+                  />
+                  <div class="cover-sheen" aria-hidden="true"></div>
+                  <div class="cover-spine-crease cover-spine-crease--left" aria-hidden="true"></div>
+                </div>
+              </div>
+
+              <!-- Page 1: Lời ngỏ (Trang 1 - Trái) -->
+              <div class="page page--paper" data-density="soft">
+                <div class="page-inner page-inner--image">
+                  <img
+                    src="assets/pages/9.webp"
+                    alt="Trang 1 - Lời ngỏ"
+                    draggable="false"
+                  />
+                  <button
+                    class="page-audio-tag page-audio-tag--tl"
+                    type="button"
+                    data-audio-spread="1"
+                    aria-label="Nghe audio Lời ngỏ"
+                    title="Bấm để nghe audio Lời ngỏ"
+                  >
+                    <span class="tag-icon" aria-hidden="true">
+                      <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+                      <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                    </span>
+                    <span class="tag-bars" aria-hidden="true"><i></i><i></i><i></i></span>
+                    <span class="tag-text">Nghe lời ngỏ</span>
+                  </button>
+                  <div class="paper-finish" aria-hidden="true"></div>
+                  <div class="gutter-shadow gutter-shadow--right" aria-hidden="true"></div>
+                </div>
+              </div>
+
+              <!-- Page 2: Mục lục (Trang 2 - Phải) -->
+              <div class="page page--paper" data-density="soft">
+                <div class="page-inner page-inner--image">
+                  <img
+                    src="assets/pages/10.webp"
+                    alt="Trang 2 - Mục lục"
+                    draggable="false"
+                  />
+                  <div class="paper-finish" aria-hidden="true"></div>
+                  <div class="gutter-shadow gutter-shadow--left" aria-hidden="true"></div>
+                </div>
+              </div>
+
+              <!-- Page 3: Những góc nhỏ quê hương (Trang 3 - Trái) -->
+              <div class="page page--paper" data-density="soft">
+                <div class="page-inner page-inner--image">
+                  <img
+                    src="assets/pages/11.webp"
+                    alt="Trang 3 - Xa rồi nhớ mãi miền quê"
+                    draggable="false"
+                  />
+                  <div class="paper-finish" aria-hidden="true"></div>
+                  <div class="gutter-shadow gutter-shadow--right" aria-hidden="true"></div>
+                </div>
+              </div>
+
+              <!-- Page 4: Quê hương bình yên (Trang 4 - Phải) -->
+              <div class="page page--paper" data-density="soft">
+                <div class="page-inner page-inner--image">
+                  <img
+                    src="assets/pages/12.webp"
+                    alt="Trang 4 - Quê hương bình yên"
+                    draggable="false"
+                  />
+                  <div class="paper-finish" aria-hidden="true"></div>
+                  <div class="gutter-shadow gutter-shadow--left" aria-hidden="true"></div>
+                </div>
+              </div>
+
+              <!-- Page 5: Ngõ nhỏ quê nhà (Trang 5 - Trái) -->
+              <div class="page page--paper" data-density="soft">
+                <div class="page-inner page-inner--image">
+                  <img
+                    src="assets/pages/13.webp"
+                    alt="Trang 5 - Ngõ nhỏ quê nhà"
+                    draggable="false"
+                  />
+                  <button
+                    class="page-audio-tag page-audio-tag--tl"
+                    type="button"
+                    data-audio-spread="3"
+                    aria-label="Nghe nhạc nền trang 5 - 6"
+                    title="Bấm để bật/tắt nhạc nền trang 5 - 6"
+                  >
+                    <span class="tag-icon" aria-hidden="true">
+                      <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+                      <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                    </span>
+                    <span class="tag-bars" aria-hidden="true"><i></i><i></i><i></i></span>
+                    <span class="tag-text">Nhạc nền 5–6</span>
+                  </button>
+                  <div class="paper-finish" aria-hidden="true"></div>
+                  <div class="gutter-shadow gutter-shadow--right" aria-hidden="true"></div>
+                </div>
+              </div>
+
+              <!-- Page 6: Quê hương tuổi thơ (Trang 6 - Phải) -->
+              <div class="page page--paper" data-density="soft">
+                <div class="page-inner page-inner--image">
+                  <img
+                    src="assets/pages/14.webp"
+                    alt="Trang 6 - Quê hương tuổi thơ đi qua đời tôi"
+                    draggable="false"
+                  />
+                  <div class="paper-finish" aria-hidden="true"></div>
+                  <div class="gutter-shadow gutter-shadow--left" aria-hidden="true"></div>
+                </div>
+              </div>
+
+              <!-- Page 7: Hẹn với miền quê cũ (Trang 7 - Trái) -->
+              <div class="page page--paper" data-density="soft">
+                <div class="page-inner page-inner--image">
+                  <img
+                    src="assets/pages/15.webp"
+                    alt="Trang 7 - Hẹn với miền quê cũ"
+                    draggable="false"
+                  />
+                  <div class="paper-finish" aria-hidden="true"></div>
+                  <div class="gutter-shadow gutter-shadow--right" aria-hidden="true"></div>
+                </div>
+              </div>
+
+              <!-- Page 8: Bài thơ Hẹn với miền quê cũ (Trang 8 - Phải) -->
+              <div class="page page--paper" data-density="soft">
+                <div class="page-inner page-inner--image">
+                  <img
+                    src="assets/pages/16.webp"
+                    alt="Trang 8 - Bài thơ Hẹn với miền quê cũ"
+                    draggable="false"
+                  />
+                  <button
+                    class="page-audio-tag page-audio-tag--br-poem"
+                    type="button"
+                    data-audio-spread="4"
+                    aria-label="Nghe đọc thơ Hẹn với miền quê cũ"
+                    title="Bấm để nghe đọc thơ Hẹn với miền quê cũ"
+                  >
+                    <span class="tag-icon" aria-hidden="true">
+                      <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+                      <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                    </span>
+                    <span class="tag-bars" aria-hidden="true"><i></i><i></i><i></i></span>
+                    <span class="tag-text">Nghe đọc thơ</span>
+                  </button>
+                  <div class="paper-finish" aria-hidden="true"></div>
+                  <div class="gutter-shadow gutter-shadow--left" aria-hidden="true"></div>
+                </div>
+              </div>
+
+              <!-- Page 9: Sự lắng đọng nơi (Trang 9 - Trái) -->
+              <div class="page page--paper" data-density="soft">
+                <div class="page-inner page-inner--image">
+                  <img
+                    src="assets/pages/17.webp"
+                    alt="Trang 9 - Sự lắng đọng nơi"
+                    draggable="false"
+                  />
+                  <button
+                    class="page-audio-tag page-audio-tag--tl"
+                    type="button"
+                    data-audio-spread="5"
+                    aria-label="Nghe cảm nhận Sự lắng đọng nơi con tim"
+                    title="Bấm để nghe cảm nhận Sự lắng đọng nơi con tim"
+                  >
+                    <span class="tag-icon" aria-hidden="true">
+                      <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+                      <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                    </span>
+                    <span class="tag-bars" aria-hidden="true"><i></i><i></i><i></i></span>
+                    <span class="tag-text">Nghe cảm nhận</span>
+                  </button>
+                  <div class="paper-finish" aria-hidden="true"></div>
+                  <div class="gutter-shadow gutter-shadow--right" aria-hidden="true"></div>
+                </div>
+              </div>
+
+              <!-- Page 10: CON TIM (Trang 10 - Phải) -->
+              <div class="page page--paper" data-density="soft">
+                <div class="page-inner page-inner--image">
+                  <img
+                    src="assets/pages/18.webp"
+                    alt="Trang 10 - Con tim"
+                    draggable="false"
+                  />
+                  <div class="paper-finish" aria-hidden="true"></div>
+                  <div class="gutter-shadow gutter-shadow--left" aria-hidden="true"></div>
+                </div>
+              </div>
+
+              <!-- Page 11: Bìa sau -->
+              <div class="page page--cover page--back-cover" data-density="hard">
+                <div class="page-inner page-inner--image">
+                  <img
+                    src="assets/pages/19.webp"
+                    alt="Bìa sau - Quê Hương"
+                    draggable="false"
+                  />
+                  <div class="cover-sheen" aria-hidden="true"></div>
+                  <div class="cover-spine-crease cover-spine-crease--right" aria-hidden="true"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button
+      id="nav-next-side"
+      class="side-nav side-nav--next"
+      type="button"
+      title="Trang sau (Mũi tên phải)"
+      aria-label="Lật sang trang tiếp theo"
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <polyline points="9 18 15 12 9 6" />
+      </svg>
+    </button>
+  </main>
+
+  <!-- Context-aware Audio Card docked cleanly above bottom controls when spread has audio -->
+  <section id="page-audio-card" class="page-audio-card" aria-label="Trình phát audio của trang" hidden>
+    <button id="audio-card-play" class="audio-card__play" type="button" aria-label="Phát hoặc tạm dừng audio">
+      <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="7 4 20 12 7 20 7 4"/></svg>
+      <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+    </button>
+
+    <div class="audio-card__body">
+      <div class="audio-card__head">
+        <span id="audio-card-title" class="audio-card__title">Lời ngỏ</span>
+        <span id="audio-card-time" class="audio-card__time">00:00 / 00:00</span>
+      </div>
+      <div class="audio-card__controls">
+        <div class="audio-eq" aria-hidden="true">
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <input
+          id="audio-card-seek"
+          class="audio-card__seek"
+          type="range"
+          min="0"
+          max="100"
+          value="0"
+          step="0.1"
+          aria-label="Tua thời gian audio"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Floating Bottom Controls & Progress -->
+  <footer class="bottom-dock">
+    <p id="gesture-hint" class="gesture-hint">
+      Kéo góc trang hoặc bấm thẻ audio trên trang để nghe
+    </p>
+
+    <nav class="dock-pill" aria-label="Điều hướng trang sách">
+      <button
+        id="btn-prev"
+        class="dock-btn"
+        type="button"
+        title="Trang trước"
+        aria-label="Trang trước"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="15 18 9 12 15 6" />
+        </svg>
+        <span class="dock-btn__label">Trước</span>
+      </button>
+
+      <div class="spread-dots" id="spread-dots" role="tablist" aria-label="Các trang sách">
+        <button class="spread-dot is-active" type="button" data-target="0" role="tab" aria-selected="true" aria-label="Bìa trước" data-tooltip="Bìa trước"></button>
+        <button class="spread-dot" type="button" data-target="1" role="tab" aria-selected="false" aria-label="Trang 1–2 · Lời ngỏ & Mục lục" data-tooltip="Trang 1–2 · Lời ngỏ & Mục lục (Audio)"></button>
+        <button class="spread-dot" type="button" data-target="3" role="tab" aria-selected="false" aria-label="Trang 3–4 · Quê hương bình yên" data-tooltip="Trang 3–4 · Quê hương bình yên"></button>
+        <button class="spread-dot" type="button" data-target="5" role="tab" aria-selected="false" aria-label="Trang 5–6 · Ký ức tuổi thơ" data-tooltip="Trang 5–6 · Ký ức tuổi thơ (Nhạc nền)"></button>
+        <button class="spread-dot" type="button" data-target="7" role="tab" aria-selected="false" aria-label="Trang 7–8 · Hẹn với miền quê cũ" data-tooltip="Trang 7–8 · Hẹn với miền quê cũ (Thơ)"></button>
+        <button class="spread-dot" type="button" data-target="9" role="tab" aria-selected="false" aria-label="Trang 9–10 · Sự lắng đọng nơi con tim" data-tooltip="Trang 9–10 · Sự lắng đọng nơi con tim (Cảm nhận)"></button>
+        <button class="spread-dot" type="button" data-target="11" role="tab" aria-selected="false" aria-label="Bìa sau" data-tooltip="Bìa sau"></button>
+      </div>
+
+      <button
+        id="btn-next"
+        class="dock-btn"
+        type="button"
+        title="Trang sau"
+        aria-label="Trang sau"
+      >
+        <span class="dock-btn__label">Sau</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="9 18 15 12 9 6" />
+        </svg>
+      </button>
+    </nav>
+  </footer>
+
+  <script src="assets/vendor/page-flip.browser.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
