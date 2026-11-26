@@ -140,6 +140,22 @@
         </svg>
       </button>
 
+      <!-- Credits / Nguồn modal trigger -->
+      <button
+        id="btn-credits"
+        class="icon-btn"
+        type="button"
+        title="Nguồn & Thông tin dự án"
+        aria-label="Xem nguồn và thông tin dự án"
+        aria-expanded="false"
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="9" />
+          <line x1="12" y1="16" x2="12" y2="12" />
+          <circle cx="12" cy="8.5" r="0.6" fill="currentColor" />
+        </svg>
+      </button>
+
       <span class="actions-divider" aria-hidden="true"></span>
 
       <!-- Download entire source folder as ZIP -->
@@ -488,6 +504,51 @@
       </button>
     </nav>
   </footer>
+
+  <!-- Credits / Nguồn Modal -->
+  <div id="credits-modal" class="credits-modal" role="dialog" aria-modal="true" aria-labelledby="credits-title" hidden>
+    <div class="credits-modal__backdrop" data-close-credits="true"></div>
+    <div class="credits-modal__card">
+      <div class="credits-modal__header">
+        <h2 id="credits-title" class="credits-modal__title">Nguồn &amp; Thông Tin Dự Án</h2>
+        <button id="credits-close" class="icon-btn" type="button" aria-label="Đóng bảng nguồn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+      </div>
+      <div class="credits-modal__body">
+        <div class="credits-group">
+          <h3>Thiết kế &amp; Nội dung</h3>
+          <ul>
+            <li><strong>Link Canva trực tiếp:</strong> <a href="https://canva.link/qubpc8pw8oiqeuo" target="_blank" rel="noopener noreferrer">canva.link/qubpc8pw8oiqeuo</a></li>
+            <li><strong>Lời ngỏ, trang thơ, cảm nhận:</strong> Công cụ AI Gemini, đã được biên tập &amp; chỉnh sửa (<a href="https://share.gemini.google/9oDXXxNJAULp" target="_blank" rel="noopener noreferrer">Xem liên kết</a>)</li>
+            <li><strong>Kịch bản cấu trúc nội dung:</strong> AI ChatGPT (<a href="https://chatgpt.com/share/6b07a1bf-4ce8-83ec-bca9-e5b2e9ad23ea" target="_blank" rel="noopener noreferrer">Xem chia sẻ</a>)</li>
+            <li><strong>Cảm hứng tựa đề bìa trước:</strong> Đề thi tốt nghiệp THPTQG môn Ngữ văn năm 2025 (Câu nghị luận)</li>
+            <li><strong>Hai câu thơ bìa trước:</strong> Trích bài thơ <em>“Tiếng hát con tàu”</em> (1958) của nhà thơ Chế Lan Viên</li>
+            <li><strong>Hai câu thơ trang 3:</strong> <em>“Xa rồi nhớ mãi miền quê / Trong tim luôn nhắc trở về ngày xưa…”</em> — trích hai câu cuối bài thơ <em>“Miền quê”</em> của tác giả Đức Trung</li>
+          </ul>
+        </div>
+        <div class="credits-group">
+          <h3>Hình ảnh &amp; Âm thanh</h3>
+          <ul>
+            <li><strong>Hình ảnh:</strong> Hệ thống dữ liệu ảnh của Canva và Pinterest</li>
+            <li><strong>Giọng đọc diễn cảm (Lời ngỏ, thơ, cảm nhận):</strong> Hà Tuyết Nhi, hậu kỳ bởi Adobe Podcast</li>
+            <li><strong>Nhạc nền xuyên suốt:</strong> <a href="https://youtu.be/BnqLaXpzmY0?si=AJSfOigzJkmUWh-i" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+            <li><strong>Nhạc lồng trang 5–6:</strong> <a href="https://youtu.be/3vRyd6xp-y0?si=6PMJtiUp4Hnc1mLW" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+          </ul>
+        </div>
+        <div class="credits-group">
+          <h3>Công nghệ &amp; Mã nguồn</h3>
+          <ul>
+            <li><strong>Phần mềm sách điện tử:</strong> Tạo bởi AI Antigravity của Google, được nhóm biên tập &amp; hoàn thiện</li>
+            <li><strong>Mã nguồn GitHub:</strong> <a href="https://github.com/giabeomap/que-huong-ebook" target="_blank" rel="noopener noreferrer">github.com/giabeomap/que-huong-ebook</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="assets/vendor/page-flip.browser.js"></script>
   <script src="app.js"></script>

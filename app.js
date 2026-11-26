@@ -120,6 +120,9 @@
   const btnSound = document.getElementById('btn-sound');
   const btnZoom = document.getElementById('btn-zoom');
   const btnFullscreen = document.getElementById('btn-fullscreen');
+  const btnCredits = document.getElementById('btn-credits');
+  const creditsModal = document.getElementById('credits-modal');
+  const creditsClose = document.getElementById('credits-close');
   const btnDownloadSource = document.getElementById('btn-download-source');
 
   if (btnDownloadSource && window.location.hostname.endsWith('github.io')) {
@@ -1082,6 +1085,24 @@
     }
   });
 
+  function setCreditsOpen(open) {
+    if (!creditsModal) return;
+    creditsModal.hidden = !open;
+    btnCredits?.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btnCredits?.classList.toggle('is-active', open);
+  }
+
+  btnCredits?.addEventListener('click', () => {
+    setCreditsOpen(creditsModal ? creditsModal.hidden : false);
+  });
+
+  creditsClose?.addEventListener('click', () => setCreditsOpen(false));
+  creditsModal?.addEventListener('click', (e) => {
+    if (e.target && e.target.getAttribute('data-close-credits') === 'true') {
+      setCreditsOpen(false);
+    }
+  });
+
   document.addEventListener('fullscreenchange', () => {
     const isFs = Boolean(document.fullscreenElement);
     btnFullscreen.classList.toggle('is-active', isFs);
@@ -1127,7 +1148,9 @@
         btnFullscreen.click();
         break;
       case 'Escape':
-        if (isZoomed) {
+        if (creditsModal && !creditsModal.hidden) {
+          setCreditsOpen(false);
+        } else if (isZoomed) {
           setZoom(false);
         }
         break;
